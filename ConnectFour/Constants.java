@@ -3,8 +3,8 @@ package ConnectFour;
 public class Constants
 {
     // Valid board size
-    public static final int BOARD_SIZE_ROWS = 6;
-    public static final int BOARD_SIZE_COLUMNS = 7;
+    public static final int BOARD_SIZE_ROW = 6;
+    public static final int BOARD_SIZE_COL = 7;
 
     // Valid board values
     public static final int X = -1;    // Indicates an "X"

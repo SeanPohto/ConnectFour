@@ -8,55 +8,79 @@ public class State
     private int whoseMove = Constants.X;
     private String xName = "";
     private String oName = "";
-    private int[][] board = new int[Constants.BOARD_SIZE_ROWS][Constants.BOARD_SIZE_COLUMNS];
+    private int[][] board = new int[Constants.BOARD_SIZE_ROW][Constants.BOARD_SIZE_COL];
 
     public boolean isWinner() {
         int total;
-        for (int col = 0; col < 4; col++) {
-            for (int row = 0; row < Constants.BOARD_SIZE_ROWS; row++) {
-                total = getBoardCell (row,0+vCount) + getBoardCell (row,1+col) + getBoardCell (row,2+col) + getBoardCell (row,3+col);
+        for (int row = 0; row < Constants.BOARD_SIZE_ROW; row++) {
+            total = getBoardCell (row,0) + getBoardCell (row,1) + getBoardCell (row,2) + getBoardCell (row,3);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+            total = getBoardCell (row,1) + getBoardCell (row,2) + getBoardCell (row,3) + getBoardCell (row,4);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+            total = getBoardCell (row,2) + getBoardCell (row,3) + getBoardCell (row,4) + getBoardCell (row,5);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+            total = getBoardCell (row,3) + getBoardCell (row,4) + getBoardCell (row,5) + getBoardCell (row,6);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+        }
+        for (int col=0; col < Constants.BOARD_SIZE_COL; col++) {
+            total = getBoardCell (0,col) + getBoardCell (1,col) + getBoardCell (2,col) + getBoardCell (3,col);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+            total = getBoardCell (1,col) + getBoardCell (2,col) + getBoardCell (3,col) + getBoardCell (4,col);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+            total = getBoardCell (2,col) + getBoardCell (3,col) + getBoardCell (4,col) + getBoardCell (5,col);
+            if (total == -4 || total == 4) {
+                return true;
+            }
+        }
+        for (int row = 0; row < Constants.BOARD_SIZE_ROW - 3; row++) {
+            for (int col = 0; col < Constants.BOARD_SIZE_COL - 4; col++) {
+                total = getBoardCell(row, col) + getBoardCell(row + 1, col + 1) + getBoardCell(row + 2, col + 2) + getBoardCell(row + 3, col + 3);
                 if (total == -4 || total == 4) {
                     return true;
                 }
             }
         }
-        for (int row = 0; row < 4; row++) {
-            for (int col=0; col < Constants.BOARD_SIZE_COLUMNS; col++) {
-                total = getBoardCell (0+row,col) + getBoardCell (1+row,col) + getBoardCell (2+row,col) + getBoardCell (3+row,col);
-                if (total == -3 || total == 3) {
+
+        for (int row = 0; row < Constants.BOARD_SIZE_ROW - 3; row++) {
+            for (int col = 3; col < Constants.BOARD_SIZE_COL - 4; col++) {
+                total = getBoardCell(row, col) + getBoardCell(row + 1, col - 1) + getBoardCell(row + 2, col - 2) + getBoardCell(row + 3, col - 3);
+                if (total == -4 || total == 4) {
                     return true;
                 }
             }
-        }
-        total = getBoardCell(0,0) + getBoardCell(1,1) + getBoardCell(2,2);
-        if (total == -3 || total == 3) {
-            return true;
-        }
-        total = getBoardCell(0,2) + getBoardCell(1,1) + getBoardCell(2,0);
-        if (total == -3 || total == 3) {
-            return true;
-        } else {
-            return false;
-        }
+        } return false;
+    } 
 
-        public boolean isTie() {
-            for (int row=0; row < Constants.BOARD_SIZE; row++) {
-                for (int col=0; col < Constants.BOARD_SIZE; col++) {
-                    if (getBoardCell(row,col) == Constants.BLANK) {
-                        return false;
-                    }
+    public boolean isTie() {
+        for (int row=0; row < Constants.BOARD_SIZE_ROW; row++) {
+            for (int col=0; col < Constants.BOARD_SIZE_COL; col++) {
+                if (getBoardCell(row,col) == Constants.BLANK) {
+                    return false;
                 }
             }
-            return true;
         }
+        return true;
+    }
 
-        public int getGameState() {
-            return this.gameState;
-        }
+    public int getGameState() {
+        return this.gameState;
+    }
 
-        public void setGameState(int gameState) {
-            this.gameState = gameState;
-        }
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
 
     public int getWhoseMove() {
         return this.whoseMove;
@@ -92,6 +116,6 @@ public class State
 
     public void resetBoard() {
         gameState= Constants.STANDBY;
-        board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
+        board = new int[Constants.BOARD_SIZE_ROW][Constants.BOARD_SIZE_COL];
     }
 }
