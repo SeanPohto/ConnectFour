@@ -40,37 +40,19 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row = 0;
-        while (row <= 0 || row >= 4) {    
-            try {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                row = scanner.nextInt();
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
-                continue;
-            }
-            if (row < 0 || row > 3 ) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-            }
-        }
-        return row;
-    }
-
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
-        while (col <= 0 || col >= 4) {
+        while (col <= 0 || col >= 7) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                System.out.println(Constants.INVALID_COLUMN);
                 scanner.next();
                 continue; 
             }
             if (col < 0 || col > 3) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                System.out.println(Constants.INVALID_COLUMN);
             }
         }
         return col;

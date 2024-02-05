@@ -30,7 +30,6 @@ public class Constants
     public static final String BOARD_STRING = "| %s | %s | %s | %s | %s | %s | %s |";
     public static final String GET_PLAYER_NAME = "Player %s: What is your name? -->";
     public static final String TITLE = "Thanks for playing Connect Four!";
-    public static final String GET_ROW_MOVE = "Player %s (%s): Enter the row for your next move -->";
     public static final String GET_COL_MOVE = "Player %s (%s): Enter the column for your next move -->";
     public static final String INVALID_COLUMN = "Your column must be between 1 and 7";
     public static final String INVALID_MOVE_ERROR = "Column %d is not a valid move. Please try again";
