@@ -29,8 +29,8 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int row, int col) {
-        return 1 <= row && row <= Constants.BOARD_SIZE &&
-        1 <= col && col <= Constants.BOARD_SIZE &&
+        return 1 <= row && row <= Constants.BOARD_SIZE_ROW &&
+        1 <= col && col <= Constants.BOARD_SIZE_COL &&
         state.getBoardCell(row-1, col-1) == Constants.BLANK;
     }
 
@@ -57,6 +57,15 @@ public class UI
         }
         return col;
     }
+      public int getMoveRow(int whoseMove, int col, String xName, String oName) {
+        int row = 0;
+        int loop = 5;
+        while (row == 0) {
+            row = state.getBoardCell(loop,col);
+            loop-=1;
+        }
+        return row;
+    }
 
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
@@ -76,7 +85,7 @@ public class UI
 
     public void printBoard(State state) {
         System.out.println(Constants.DIVIDER_STRING);
-        for (int row = 0; row < Constants.BOARD_SIZE; row++) {
+        for (int row = 0; row < Constants.BOARD_SIZE_ROW; row++) {
             System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)));
             System.out.println();
             System.out.println(Constants.DIVIDER_STRING);
@@ -84,7 +93,7 @@ public class UI
     }
 
     public void printInvalidRowOrColumn() {
-        System.out.printf(Constants.INVALID_ROW_OR_COLUMN);
+        System.out.printf(Constants.INVALID_COLUMN);
     }
 
     public void printInvalidMove(int row, int col) {

@@ -105,14 +105,6 @@ public class State
     public void setOName(String oName) {
         this.oName = oName;
     }
-    
-    public int getPlayerCol (int row, int col) {
-        while (col <= Constants.BOARD_SIZE_COL && row <= Constants.BOARD_SIZE_ROW) {
-            for (int row=5; row > Constants.BOARD_SIZE_ROW; row--) {
-                if 
-            }
-        }
-    }
 
     public int getBoardCell(int row, int col) {
         return this.board[row][col];
