@@ -51,18 +51,18 @@ public class UI
                 scanner.next();
                 continue; 
             }
-            if (col < 0 || col > 3) {
+            if (col < 0 || col > 7) {
                 System.out.println(Constants.INVALID_COLUMN);
             }
         }
         return col;
     }
       public int getMoveRow(int whoseMove, int col, String xName, String oName) {
-        int row = 0;
+        int row = 6;
         int loop = 5;
         while (row == 0) {
-            row = state.getBoardCell(loop,col);
             loop-=1;
+            row = state.getBoardCell(loop,col);
         }
         return row;
     }
@@ -86,7 +86,10 @@ public class UI
     public void printBoard(State state) {
         System.out.println(Constants.DIVIDER_STRING);
         for (int row = 0; row < Constants.BOARD_SIZE_ROW; row++) {
-            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)));
+            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), 
+            getXOrO(state.getBoardCell(row, 2)), getXOrO(state.getBoardCell(row, 3)), 
+            getXOrO(state.getBoardCell(row, 4)), getXOrO(state.getBoardCell(row, 5)),
+            getXOrO(state.getBoardCell(row, 6)));
             System.out.println();
             System.out.println(Constants.DIVIDER_STRING);
         }
