@@ -12,6 +12,7 @@ public class State
 
     public boolean isWinner() {
         int total;
+        //check rows
         for (int row = 0; row < Constants.BOARD_SIZE_ROW; row++) {
             total = getBoardCell (row,0) + getBoardCell (row,1) + getBoardCell (row,2) + getBoardCell (row,3);
             if (total == -4 || total == 4) {
@@ -30,6 +31,7 @@ public class State
                 return true;
             }
         }
+        //check columns
         for (int col=0; col < Constants.BOARD_SIZE_COL; col++) {
             total = getBoardCell (0,col) + getBoardCell (1,col) + getBoardCell (2,col) + getBoardCell (3,col);
             if (total == -4 || total == 4) {
@@ -44,6 +46,7 @@ public class State
                 return true;
             }
         }
+        //check diagonals (TopLeft to BottomRight)
         for (int row = 0; row < Constants.BOARD_SIZE_ROW - 3; row++) {
             for (int col = 0; col < Constants.BOARD_SIZE_COL - 4; col++) {
                 total = getBoardCell(row, col) + getBoardCell(row + 1, col + 1) + getBoardCell(row + 2, col + 2) + getBoardCell(row + 3, col + 3);
@@ -52,7 +55,7 @@ public class State
                 }
             }
         }
-
+        //check diagonals (BottomLeft to TopRight)
         for (int row = 0; row < Constants.BOARD_SIZE_ROW - 3; row++) {
             for (int col = 3; col < Constants.BOARD_SIZE_COL - 4; col++) {
                 total = getBoardCell(row, col) + getBoardCell(row + 1, col - 1) + getBoardCell(row + 2, col - 2) + getBoardCell(row + 3, col - 3);
@@ -107,11 +110,22 @@ public class State
     }
 
     public int getBoardCell(int row, int col) {
-        return this.board[row][col];
+        if (row>=0 && row < Constants.BOARD_SIZE_ROW) {
+            if (col >= 0 && col < Constants.BOARD_SIZE_COL){
+                return this.board[row][col];
+            }
+        }
+        return 0;
     }
 
-    public void setBoardCell(int row, int col, int value) {
-        this.board[row][col] = value;
+    public boolean setBoardCell(int col, int value) {
+        for (int row = Constants.BOARD_SIZE_ROW-1; row >= 0; row--) {
+            if (board[row][col] == Constants.BLANK) {
+                board[row][col] = value;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void resetBoard() {

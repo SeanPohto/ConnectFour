@@ -28,10 +28,9 @@ public class UI
         return (whoseMove == -1) ? xName : oName;
     }
 
-    public boolean isLegalMove(State state, int row, int col) {
-        return 1 <= row && row <= Constants.BOARD_SIZE_ROW &&
-        1 <= col && col <= Constants.BOARD_SIZE_COL &&
-        state.getBoardCell(row-1, col-1) == Constants.BLANK;
+    public boolean isLegalMove(State state, int col) {
+        return 1 <= col && col <= Constants.BOARD_SIZE_COL && 
+        state.getBoardCell(col, 1) == Constants.BLANK;
     }
 
     // Prompt for input methods
@@ -42,7 +41,7 @@ public class UI
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
-        while (col <= 0 || col >= 7) {
+        while (col <= 0 || col >= Constants.BOARD_SIZE_COL) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
@@ -51,23 +50,12 @@ public class UI
                 scanner.next();
                 continue; 
             }
-            if (col < 0 || col > 7) {
+            if (col < 0 || col > Constants.BOARD_SIZE_COL) {
                 System.out.println(Constants.INVALID_COLUMN);
             }
         }
         return col;
     }
-
-    public int getMoveRow(int whoseMove, int col, String xName, String oName) {
-        int row = 6;
-        while (row < 6) {
-            if (state.getBoardCell(row,col) == -1 || state.getBoardCell(row,col) == 1) {
-                row-=1;
-            }
-            return row;
-        }
-        return row;
-    } 
 
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
@@ -97,16 +85,16 @@ public class UI
         }
     }
 
-    public void printInvalidRowOrColumn() {
+    public void printInvalidColumn() {
         System.out.printf(Constants.INVALID_COLUMN);
     }
 
-    public void printInvalidMove(int row, int col) {
-        System.out.printf(Constants.INVALID_MOVE_ERROR, row, col);
+    public void printInvalidMove(int col) {
+        System.out.printf(Constants.INVALID_MOVE_ERROR, col);
     }
 
-    public void printMove(State state, int row, int col) {
-        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
+    public void printMove(State state, int col) {
+        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), col);
         System.out.println();
     } 
 

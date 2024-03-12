@@ -5,7 +5,7 @@ public class EventLoop {
     // Instance variables for the UI and State classes
     State state = new State();
     UI ui = new UI();
-    int row, col;
+    int col;
 
     public static void main(String[] args) {
         EventLoop eventLoop = new EventLoop(); 
@@ -29,22 +29,20 @@ public class EventLoop {
             } else if (gameState == Constants.GET_X_MOVE) {
                 ui.printBoard(state);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
-                row = ui.getMoveRow(state.getWhoseMove(), col, state.getXName(), state.getOName());
-                if (ui.isLegalMove(state, row, col)) {
+                if (ui.isLegalMove(state, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
                 }
 
             } else if (gameState == Constants.GET_O_MOVE) {
                 ui.printBoard(state);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
-                row = ui.getMoveRow(state.getWhoseMove(), col, state.getXName(), state.getOName());
-                if (ui.isLegalMove(state, row, col)) {
+                if (ui.isLegalMove(state, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
                 }
 
             } else if (gameState == Constants.MAKE_MOVE) {
-                ui.printMove(state, row, col);
-                state.setBoardCell(row-1, col-1, state.getWhoseMove());
+                ui.printMove(state, col);
+                state.setBoardCell(col-1, state.getWhoseMove());
                 state.setGameState(Constants.CHECK_IF_WINNER);
 
             } else if (gameState == Constants.CHECK_IF_WINNER) {
