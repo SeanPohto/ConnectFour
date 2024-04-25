@@ -41,7 +41,7 @@ public class UI
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
-        while (col <= 0 || col >= Constants.BOARD_SIZE_COL) {
+        while (col <= 0 || col >= Constants.BOARD_SIZE_COL + 1) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
