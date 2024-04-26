@@ -43,16 +43,14 @@ public class EventLoop {
             } else if (gameState == Constants.MAKE_MOVE) {
                 ui.printMove(state, col);
                 state.setBoardCell(col-1, state.getWhoseMove());
-                state.setGameState(Constants.CHECK_IF_WINNER);
+                state.setGameState(Constants.CHECK_IF_WINNER_PLEASE);
 
-            } else if (gameState == Constants.CHECK_IF_WINNER) {
-                if (state.isWinner()) {
-                    if (state.getWhoseMove() == Constants.X) {
+            } else if (gameState == Constants.CHECK_IF_WINNER_PLEASE) {
+                if (state.isWinner() && state.getWhoseMove() == Constants.O) {
+                        state.setGameState(Constants.O_WINS); 
+                    } else if (state.isWinner() && state.getWhoseMove() == Constants.X) {
                         state.setGameState(Constants.X_WINS);
                     } else {
-                        state.setGameState(Constants.O_WINS);
-                    }
-                } else {
                     state.setGameState(Constants.CHECK_IF_TIE);
                 }
 
